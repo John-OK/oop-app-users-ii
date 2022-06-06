@@ -1,5 +1,5 @@
 class User:
-    total_post_num = 0
+    total_posts_num = 0
     all_posts = {}
 
     def __init__(self, name, email_address, driver_license_number, you_name_it="I named it!"):
@@ -12,9 +12,9 @@ class User:
     def new_post(self):
         post = input("Message:\n")
         if len(post) > 0:
-            __class__.total_post_num += 1
-            self.posts[__class__.total_post_num] = post
-            __class__.all_posts[__class__.total_post_num] = post
+            self.posts[User.total_posts_num] = post
+            User.all_posts[User.total_posts_num] = post
+            User.total_posts_num += 1
             print(f"You're message '{post}' has been posted.")
         else:
             print(f"You didn't post anything. Wouldn't you like to share {self.name.title()}?\n")
@@ -22,12 +22,12 @@ class User:
     def delete_post(self):
         post_to_delete = input(f"Which post would you like to delete?\n{self.posts}\nEnter 'q' to cancel\n")
 
-        if post_to_delete == 'q':
+        if post_to_delete.lower() == 'q':
             print(f"I'm glad you've changed your mind {self.name.title()}.")
-        elif type(post_to_delete) == int:
+        elif type(int(post_to_delete)) == int:
             try:
-                self.posts[post_to_delete] = "You have deleted this post."
-                __class__.all_posts[post_to_delete] = f"{self.name} has deleted this post."
+                self.posts[int(post_to_delete)] = "YOU DELETED THIS POST."
+                User.all_posts[int(post_to_delete)] = f"{self.name} DELETED THIS POST."
             except:
                 print(f"I'm sorry {name}. I'm afraid I can't do that")
 
@@ -36,27 +36,13 @@ sue = User('Sue', 'suziq@aboynamedsue.com', 'B9876543', 'Anything but "Sue!"')
 jesus = User('DaJesus', 'dajesus@weroll.net',
              'Z4682467', 'Nobody messes wit da Jesus!')
 
-# print(bob.name, sue.email_address, jesus.you_name_it)
-# bob.new_post()
-# sue.new_post()
-# bob.new_post()
-# # # print(bob.post_num)
-# # # print(sue.post_num)
-# # # print(User.all_posts)
-# # # print(User.total_post_num)
-# bob.delete_post()
-# sue.delete_post()
-# bob.delete_post()
-# print(bob.posts)
-# print(User.all_posts)
-
-a = {
-    1:'howdy',
-    2:'hi',
-    3:'bye',
-}
-print(a)
-b = 1
-print(type(b))
-a[b] = 'DELETED'
-print(a)
+print(bob.name, sue.email_address, jesus.you_name_it)
+bob.new_post()
+sue.new_post()
+bob.new_post()
+bob.delete_post()
+sue.delete_post()
+bob.delete_post()
+print(bob.posts)
+print(sue.posts)
+print(User.all_posts)
